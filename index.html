@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Js live</title>
+</head>
+<body>
+<script>
+    // ESERCIZIO1
+    var a, b, c, d, e;
+    a = 1;
+    b = 2;
+    c = 3;
+    d = 4;
+    e = 5;
+    var RisultatoSomma = a + b + c + d + e;
+    var RisultatoMedia = RisultatoSomma / 5;
+
+    var RisultatoEsercizio1= "Dati 5 valori:\n"
+    +"a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", e=" + e + "\n\n"
+        + "La somma è:" + RisultatoSomma + "\n"
+        + "Il tipo della somma è:" + typeof RisultatoSomma + "\n"
+        + "La media è:" + RisultatoMedia + "\n"
+        + "Il tipo della media è:" + typeof RisultatoMedia;
+
+</script>
+<script>
+    // ESERCIZIO2
+
+    var currentYear = 2018;
+    var bornYear = 1991;
+
+
+    var age = currentYear - bornYear;
+    var ageDistance = 100 - age;
+
+    var resultEsercizio2 = "età =" + age + ", anni mancanti ="+ ageDistance;
+
+    // console.log(result);
+</script>
+<script>
+    // ESERCIZIO 3
+
+    var allCats = 44;
+    var CatsForRow = 6;
+
+    var RowNumber = allCats / CatsForRow;
+    var RowNumberRouded = Math.ceil(RowNumber);
+    var remainder = allCats % CatsForRow;
+    var Missing = CatsForRow - remainder;
+
+    var resultEsercizio3 = "numero di file = "+RowNumberRouded+", gatti mancanti = " + Missing;
+    // console.log(result);
+</script>
+<script>
+    // Esercizio 4
+    var TotSec= 12560;
+    var secondInHour= 60 * 60;
+    var oreConv= TotSec/ secondInHour;
+    var Ore= Math.floor(oreConv);
+    var restante1 = TotSec % secondInHour;
+    var MinutiConv= restante1 / 60;
+    var Minuti = Math.floor(MinutiConv);
+    var Secondi= restante1 % 60;
+
+    var Result = Ore + " Or" + (Ore === 1? "a" : "e")+", " +
+        ""+Minuti+" Minut" + (Minuti === 1? "o" : "i")+ "e "
+        +Secondi+" Second" + (Secondi === 1? "o" : "i");
+    console.log(Result);
+    
+</script>
+</body>
+</html>
