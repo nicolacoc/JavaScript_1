@@ -16,8 +16,8 @@
     var RisultatoSomma = a + b + c + d + e;
     var RisultatoMedia = RisultatoSomma / 5;
 
-    var RisultatoEsercizio1= "Dati 5 valori:\n"
-    +"a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", e=" + e + "\n\n"
+    var RisultatoEsercizio1 = "Dati 5 valori:\n"
+        + "a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", e=" + e + "\n\n"
         + "La somma è:" + RisultatoSomma + "\n"
         + "Il tipo della somma è:" + typeof RisultatoSomma + "\n"
         + "La media è:" + RisultatoMedia + "\n"
@@ -34,7 +34,7 @@
     var age = currentYear - bornYear;
     var ageDistance = 100 - age;
 
-    var resultEsercizio2 = "età =" + age + ", anni mancanti ="+ ageDistance;
+    var resultEsercizio2 = "età =" + age + ", anni mancanti =" + ageDistance;
 
     // console.log(result);
 </script>
@@ -49,25 +49,186 @@
     var remainder = allCats % CatsForRow;
     var Missing = CatsForRow - remainder;
 
-    var resultEsercizio3 = "numero di file = "+RowNumberRouded+", gatti mancanti = " + Missing;
+    var resultEsercizio3 = "numero di file = " + RowNumberRouded + ", gatti mancanti = " + Missing;
     // console.log(result);
 </script>
 <script>
     // Esercizio 4
-    var TotSec= 12560;
-    var secondInHour= 60 * 60;
-    var oreConv= TotSec/ secondInHour;
-    var Ore= Math.floor(oreConv);
+    var TotSec = 12560;
+    var secondInHour = 60 * 60;
+    var oreConv = TotSec / secondInHour;
+    var Ore = Math.floor(oreConv);
     var restante1 = TotSec % secondInHour;
-    var MinutiConv= restante1 / 60;
+    var MinutiConv = restante1 / 60;
     var Minuti = Math.floor(MinutiConv);
-    var Secondi= restante1 % 60;
+    var Secondi = restante1 % 60;
 
-    var Result = Ore + " Or" + (Ore === 1? "a" : "e")+", " +
-        ""+Minuti+" Minut" + (Minuti === 1? "o" : "i")+ "e "
-        +Secondi+" Second" + (Secondi === 1? "o" : "i");
-    console.log(Result);
-    
+    var ResultEsercizio4 = Ore + " Or" + (Ore === 1 ? "a" : "e") + ", " +
+        "" + Minuti + " Minut" + (Minuti === 1 ? "o" : "i") + "e "
+        + Secondi + " Second" + (Secondi === 1 ? "o" : "i");
+    // console.log(Result);
+
+</script>
+<script>
+
+    // var counter = 0;
+    //
+    // while (counter <= 10){
+    //
+    //     console.log("I am waiting " + counter)
+    //     counter++;
+    // }
+</script>
+<script>
+
+    var a = 30;
+    var b = -2;
+    var c = 10;
+
+    var caldo, freddo;
+
+
+    if (a > b && a > c) {
+        caldo = a;
+    } else if (b > a && b > c) {
+        caldo = b;
+    } else {
+        caldo = c;
+    }
+
+    if (a < b && a < c) {
+        freddo = a;
+    } else if (b < a && b < c) {
+        freddo = b;
+    } else {
+        freddo = c;
+    }
+
+    var resultEsercizioFreddo = "giornata più calda " + caldo + " , giornata più fredda " + freddo;
+    // console.log(resultEsercizioFreddo);
+
+</script>
+<script>
+    /* 9999
+    conta numeri
+
+     */
+    var n = 995;
+    var totNumber;
+
+    if (n <= 9) {
+        totNumber = 1;
+    } else if (n >= 10 && n <= 99) {
+        totNumber = 2
+    } else if (n >= 100 && n <= 999) {
+        totNumber = 3;
+    } else if (n >= 1000 && n <= 9999) {
+        totNumber = 4;
+    } else {
+        totNumber = "Superato tot";
+    }
+    var resultContaNumeri = "I numeri sono in totale: " + totNumber + " cifre";
+    // console.log(resultContaNumeri);
+</script>
+<script>
+    /*
+  Fai il professore
+  Scrivi un programma che converta un voto numerico (v) in un giudizio seguendo questi parametri:
+    v < 18: insufficiente
+    18 <= v < 21: sufficiente
+    21 <= v < 24: buono
+    24 <= v < 27: distinto
+    27 <= v <= 29: ottimo
+    v = 30: eccellente
+  Utilizza costrutto If.
+  Esempio:
+    Input: v = 29
+    Output: Distinto
+  Variante
+  Realizzare una versione con il costrutto Switch-Case. In questo caso gestire anche
+  il caso in cui il voto inserito non sia valido.
+*/
+
+    var v = 30;
+    var voto;
+
+    if (v >= 0 && v < 18) {
+        voto = "Insufficiente";
+        console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+    } else if (18 <= v && v < 21) {
+        voto = "Sufficiente";
+        console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+    } else if (21 <= v && v < 24) {
+        voto = "Buono";
+        console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+    } else if (24 <= v && v < 27) {
+        voto = "Distinto";
+        console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+    } else if (27 <= v && v <= 29) {
+        voto = "Ottimo";
+        console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+    } else if (v === 30) {
+        voto = "Eccellente";
+        console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+    } else {
+        throw Error("Voto non valido.");
+    }
+
+    switch (v) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+            voto = "Insufficiente";
+            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+            break;
+        case 18:
+        case 19:
+        case 20:
+            voto = "Sufficiente";
+            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+            break;
+        case 21:
+        case 22:
+        case 23:
+            voto = "Buono";
+            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+            break;
+        case 24:
+        case 25:
+        case 26:
+            voto = "Distinto";
+            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+            break;
+        case 27:
+        case 28:
+        case 29:
+            voto = "Ottimo";
+            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+            break;
+        case 30:
+            voto = "Eccellente";
+            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+            break;
+        default:
+            throw Error("Voto non valido.");
+    }
+
+
 </script>
 </body>
 </html>
