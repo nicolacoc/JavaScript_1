@@ -173,60 +173,211 @@
     } else {
         throw Error("Voto non valido.");
     }
-  /*  switch (v) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-            voto = "Insufficiente";
-            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
-            break;
-        case 18:
-        case 19:
-        case 20:
-            voto = "Sufficiente";
-            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
-            break;
-        case 21:
-        case 22:
-        case 23:
-            voto = "Buono";
-            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
-            break;
-        case 24:
-        case 25:
-        case 26:
-            voto = "Distinto";
-            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
-            break;
-        case 27:
-        case 28:
-        case 29:
-            voto = "Ottimo";
-            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
-            break;
-        case 30:
-            voto = "Eccellente";
-            console.log("Il tuo voto è " + v + " e quindi sei " + voto);
-            break;
-        default:
-            throw Error("Voto non valido.");
+    /*  switch (v) {
+          case 0:
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+          case 6:
+          case 7:
+          case 8:
+          case 9:
+          case 10:
+          case 11:
+          case 12:
+          case 13:
+          case 14:
+          case 15:
+          case 16:
+          case 17:
+              voto = "Insufficiente";
+              console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+              break;
+          case 18:
+          case 19:
+          case 20:
+              voto = "Sufficiente";
+              console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+              break;
+          case 21:
+          case 22:
+          case 23:
+              voto = "Buono";
+              console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+              break;
+          case 24:
+          case 25:
+          case 26:
+              voto = "Distinto";
+              console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+              break;
+          case 27:
+          case 28:
+          case 29:
+              voto = "Ottimo";
+              console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+              break;
+          case 30:
+              voto = "Eccellente";
+              console.log("Il tuo voto è " + v + " e quindi sei " + voto);
+              break;
+          default:
+              throw Error("Voto non valido.");
+      }
+  */
+
+</script>
+<script>
+    function Card(face, suit) {
+        this.face = getFace(face);
+        this.suit = getSuit(suit);
+
+        function getFace(face) {
+            if (face < 0 || face > 9 || Number.isInteger(face) === false) {
+                throw new Error("Valore in face non accettato");
+            }
+            switch (face) {
+                case 0:
+                    return "Asso";
+                case 9:
+                    return "Re";
+                default:
+                    return (face + 1).toString();
+            }
+        }
+
+        function getSuit(suit) {
+            if (suit < 0 || suit > 3) {
+                throw new Error("Valore in suit non accettato");
+            }
+            switch (suit) {
+                case 0:
+                    return "Cuori";
+                case 1:
+                    return "Fiori";
+                case 2:
+                    return "Quadri";
+                case 3:
+                    return "Picche";
+                default:
+                    throw new Error("Valore in suit non accettato");
+            }
+        }
+
     }
+
+    function cardDeck() {
+        this.shuffle = function () {
+            var face = Math.round(Math.random() * 9);
+            var suit = Math.round(Math.random() * 3);
+
+            return new Card(face, suit);
+        }
+    }
+
+    var cardDek = new cardDeck();
+    console.log(cardDek);
+    console.log(cardDek.shuffle());
+</script>
+<script>
+    /*
+  Operazioni tra array
+  Scrivi un programma che dati:
+  - 2 array di 10 elementi interi casuali compresi tra 1 e 10,
+  - il tipo di operazione aritmetica da effettuare, una delle seguenti:
+    addizione
+    sottrazione
+    moltiplicazione
+    divisione
+  Esegua il calcolo tra ogni elemento dei due array, salvando ciascun risultato in un terzo array di appoggio.
+  Esempio:
+    Input: a = [3, 7, 2, 5, 8, 1, 2, 5, 6, 4], b = [9, 3, 1, 4, 7, 6, 5, 10, 1, 5], operazione = "addizione"
+    Output: c = [12, 10, 3, 9, 15, 7, 7, 15, 7, 9]
+  Consigli:
+  Se non ricordi come generare un numero random e come convertirlo nel tuo intervallo riguarda l'esercizio sulle condizioni "Chi l'azzecca?".
+  //  -> map(function (e) { return e + 1; })
+  // forEach
 */
+
+    function OperazioniTraArray(array1, array2, operazione) {
+        // var result = [];
+
+        if (array1.length !== array2.length) {
+            throw Error("le array non sono lunghe uguali");
+        } /*else {
+            var err = 0;
+            var err2 = 0;
+            for (var c = 0; c < array1.length; c++) {
+                if (!isNaN(array1[c])) {
+                    err++;
+                }
+                if (!isNaN(array2[c])) {
+                    err2++
+                }
+            }
+
+            if (err !== array1.length || err2 !== array2.length) {
+                throw Error("le array non sono Numeri");
+            }
+            else {
+                   for (var i = 0; i < array1.length; i++) {
+                       switch (operazione) {
+                           case "addizione":
+                               result[i] = array1[i] + array2[i];
+                               break;
+
+                           case "sottrazione":
+                               result[i] = array1[i] - array2[i];
+                               break;
+
+                           case "moltiplicazione":
+                               result[i] = array1[i] * array2[i];
+                               break;
+
+                           case "divisione":
+                               result[i] = Math.round(array1[i] / array2[i]);
+                               break;
+
+                           default:
+                               throw Error("Operazione non consentita");
+                       }
+                   }
+        }*/
+
+        // return result;
+        return array1.map((value, index) => {
+
+            if (isNaN(value) || isNaN(array2[index])) {
+                throw Error("le array non sono Numeri");
+            }
+
+
+            switch (operazione) {
+                case "addizione":
+                    return value + array2[index];
+
+                case "sottrazione":
+                    return value - array2[index];
+
+                case "moltiplicazione":
+                    return value * array2[index];
+
+                case "divisione":
+                    return Math.round(value / array2[index]);
+
+                default:
+                    throw Error("Operazione non consentita");
+            }
+
+
+        })
+
+    }
+
+    var result = OperazioniTraArray([3, 7, 2, 5, 8, 1, 2, 5, 6, 4], [9, 3, 1, 4, 7, 6, 5, 10, 1, 5], "addizione");
+    console.log(result);
 
 </script>
 </body>

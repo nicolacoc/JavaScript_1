@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dom 3</title>
+</head>
+<body>
+<h1>things to do</h1>
+<ol id="toDoList">
+  <li>Mow the lawn</li>
+  <li>Clean the windows</li>
+  <li>Answer your email</li>
+</ol>
+<p id="toDoNotes">Make sure all these are game on Tv!</p>
+
+<script>
+    (function(){
+const allElement= document.getElementById("toDoList");
+let count = 0;
+allElement.childNodes.forEach(node => {
+    if (node.nodeType === 1){
+        count++;
+    }
+})
+        alert("the ordered list contains " + count + " items");
+    })();
+</script>
+</body>
+</html>

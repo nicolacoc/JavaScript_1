@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="id1">
+    <p id="para1">Welcome to my web page.</p>
+    <p id="para2">Please take a look around.</p>
+    <input type="button" id="btn" value="Replace Element">
+</div>
+<script>
+    let ele1 = document.getElementById("btn");
+    ele1.addEventListener("click", result);
+function result(){
+    let ele= document.getElementById("para1");
+    ele.innerHTML = "<h2>"+"Welcome"+"</h2>";
+}
+</script>
+</body>
+</html>

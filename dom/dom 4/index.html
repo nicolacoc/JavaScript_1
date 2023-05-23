@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom 4</title>
+</head>
+<body>
+<h1>The Extremadura Region of Western Spain</h1>
+<article id="item-1">
+    <h2>Geography Of The Region</h2>
+    <p>The autonomous community of Extremadura is in western Spain alongside the
+        Portuguese border. It borders the Spanish regions of Castilla y Leon, Castilla La
+        Mancha and Andalucía as well as Portugal (to the West). Covering over 40,000 square
+        kilometers it has two provinces: Cáceres in the North and Badajoz in the South.</p>
+</article>
+<article id="item-2">
+    <h2>Where To Stay</h2>
+    <p>There is a wide range of accommodation throughout Extremadura including
+        small inns and guest houses ('Hostals') or think about renting a 'casa rural'
+        (country house)if you are traveling in a group.</p>
+</article>
+<article id="item-3">
+    <h2>Climate</h2>
+    <p>Generally Mediterranean, except for the north, where it is continental.
+        Generally known for its extremes, including very hot and dry summers with frequent
+        droughts, and its long and mild winters.</p>
+</article>
+<article id="item-4">
+    <h2>What To See</h2>
+    <p>Extremadura hosts major events all year round including theater, music,
+        cinema, literature and folklore. Spectacular venues include castles, medieval town
+        squares and historic centers. There are special summer theater festivals in the
+        Mérida, Cáceres, Alcántara and Alburquerque.</p>
+</article>
+<article id="item-5">
+    <h2>Gastronomy</h2>
+    <p>The quality of Extremaduran food arises from the fine quality of the local
+        ingredients. In addition to free-range lamb and beef, fabulous cheeses, red and
+        white wines, olive oil, honey and paprika, Extremadura is particularly renowned for
+        Iberian ham. The 'pata negra' (blackfoot) pigs are fed on acorns in the cork-oak
+        forests, the key to producing the world's best ham and cured sausages.</p>
+</article>
+
+<script>
+    function getArticleTitles(list) {
+        let articles = [];
+        list.forEach((node) => {
+            articles.push({
+                id: node.id,
+                title: node.querySelector("h2").innerHTML
+            })
+        })
+        // for (let i = 0; i < list.length; i++) {
+        //     articles.push(list.item(i).innerHTML)
+        // }
+        return articles;
+    }
+
+    (function () {
+        let bodySelElement = document.querySelector("body");
+        if (bodySelElement instanceof HTMLBodyElement) {
+            let articles = getArticleTitles(document.querySelectorAll("article"));
+            let ulElement = document.createElement("ul");
+            bodySelElement.prepend(ulElement);
+            articles.forEach((array) => {
+                let liElement = document.createElement("li");
+                ulElement.append(liElement);
+
+                let aElement = document.createElement("a");
+                aElement.setAttribute("href", "#" + array.id)
+                aElement.innerHTML = array.title;
+                liElement.append(aElement);
+            })
+        }
+
+
+    })();
+
+    // per ciascun article dobbiamo creare un elemento di <li><a href="#">{title}</a></li>
+    // prependere gli elementi come [primo] figlio del tag body
+    // gli elementi <li> devono essere a loro volta inclusi in un element <ul>
+    // passo successivo, dovete aggiungere anche l'attributo "id" nell'attributo href...
+    // articletitles può tornare una lista di object invece???
+</script>
+</body>
+</html>
