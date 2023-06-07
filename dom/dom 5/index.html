@@ -140,21 +140,17 @@
 
                 })*/
 
+            function toListItem({name , city, age}){
+                return `<li class="list-group-item d-flex">
+                             <div>${name} ${(city) ? `(${city})`: ''}</div>
+                             <div class="ms-auto">${age} years old</div>
+                            </li>`;
+            }
+
             sel.innerHTML = persons
                 .filter(p => p instanceof Person)
                 .sort((a, b) => a.age - b.age)
-                .map((p) => {
-                    let s = "";
-                    s += '<li class="list-group-item d-flex">';
-                    s += '<div>' + p.name;
-                    s += (p.city.length > 0) ? ' (' + p.city + ')' : '';
-                    s += '</div>'
-                    s += '<div class="ms-auto">' + p.age + ' years old';
-                    s += '</div>'
-                    s += '</li>'
-
-                    return s;
-                })
+                .map(toListItem)
                 .join("");
         }
 
