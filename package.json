@@ -2,6 +2,7 @@
   "name": "jslive",
   "version": "1.0.0",
   "devDependencies": {
+    "bootstrap": "^5.2.3",
     "chai": "^4.3.7",
     "mocha": "^10.2.0"
   }
