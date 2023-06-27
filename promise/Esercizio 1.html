@@ -10,8 +10,9 @@
             background-color: cornflowerblue;
             border: solid 1px black;
             padding: 10px;
+            overflow: hidden;
         }
-        .loading-effect{
+        p{
             margin:unset;
         }
     </style>
@@ -35,14 +36,54 @@
 
 
 
-    function LoadingAttesa (display) {
+    function LoadingAttesa (display, message) {
         const p = document.createElement("p");
         p.setAttribute("class", "loading-effect");
-        p.innerHTML = "Attendere....";
-        this.start = () => {display.append(p)}
+        p.innerHTML = `Attendere ${message}....`;
+        this.start = () => {
+            display.append(p);
+            this.Interval = setInterval(()=>{p.innerHTML+="."},10);
+        }
+        this.unset = () => {
+            display.removeChild(p);
+            clearInterval(this.Interval);
+        }
     }
-    const LoadingAttesa2 = new LoadingAttesa(display);
-    LoadingAttesa2.start()
+    const LoadingAttesa2 = new LoadingAttesa(display, "scaricamento in corso");
+    const BlobLoadingAttesa = new LoadingAttesa(display, "leggendo in corso");
+    LoadingAttesa2.start();
+
+    promise
+        .then((response)=>{
+        if (response.status !== 200){
+            throw new Error("Response ko");
+        }
+
+        const p2 = document.createElement("p");
+        p2.innerHTML=`HTTP status code: ${response.status}`;
+            display.append(p2);
+        const blob = response.blob();
+            LoadingAttesa2.unset();
+            BlobLoadingAttesa.start()
+            return blob;
+    })
+        .then((blob)=>{
+            const url = URL.createObjectURL(blob);
+            const img = document.createElement("img");
+            img.src= url;
+
+            display.append(img);
+            BlobLoadingAttesa.unset();
+        })
+
+        .catch((error)=>{
+            LoadingAttesa2.unset();
+            BlobLoadingAttesa.unset();
+            alert(error.message);
+        })
+
+        .finally(()=>{})
+
 
 </script>
 </body>
