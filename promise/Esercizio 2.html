@@ -6,14 +6,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
-        .exercise-display{
+        .exercise-display {
             background-color: cornflowerblue;
             border: solid 1px black;
             padding: 10px;
             overflow: hidden;
         }
-        p{
-            margin:unset;
+
+        p {
+            margin: unset;
+        }
+
+        .all-status-message{
+            color: greenyellow;
+            text-align: center;
+        }
+
+        .race-status-message{
+            color: blue;
+            text-align: center;
         }
     </style>
 </head>
@@ -25,29 +36,125 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script>
-    function RandomPromise(){
-        const TimeToWait = Math.floor(Math.random() * 2000)
-        return new Promise((resolve, reject)=>{
+    const display = document.querySelector(".exercise-display");
 
-           const t = setTimeout(()=>{
+    function RandomPromise(index) {
+
+
+
+        const TimeToWait = Math.floor(Math.random() * 10000);
+
+        return new Promise((resolve, reject) => {
+        /*    if (TimeToWait < 100) {
+                reject("TimeToWait too low");
+                return
+            }*/
+
+            const t = setTimeout(() => {
                 resolve(TimeToWait);
                 clearTimeout(t);
+
+                const div = document.createElement("div");
+                div.innerHTML = `Resolved <strong>${index}</strong> after <strong>${TimeToWait / 1000}</strong> Seconds`;
+                display.append(div);
             }, TimeToWait);
 
 
         });
     }
 
-    const promise1 = RandomPromise();
-    const promise2 = RandomPromise();
-    const promises = [promise1, promise2];
-Promise.all(promises).then((times)=>{
-    times.forEach((time)=>{
-        console.log(`I attend ${time} ms`)
+    function LoadingAttesa(display, message) {
+        const p = document.createElement("p");
+        p.setAttribute("class", "loading-effect");
+        p.innerHTML = `Attendere ${message}....`;
+        this.start = () => {
+            display.append(p);
+            this.Interval = setInterval(() => {
+                p.innerHTML += "."
+            }, 10);
+        }
+        this.unset = () => {
+            display.removeChild(p);
+            clearInterval(this.Interval);
+        }
+    }
+
+    const attesa = new LoadingAttesa(display, "Randomize");
+    attesa.start();
+
+
+
+    const promises = [];
+
+    for (let i=1; i<=10; i++){
+        promises.push(RandomPromise(i))
+    }
+
+
+    function allList(times, p){
+        times.forEach((time) => {
+            console.log(`I attend ${time} ms`)
+        })
+        const div = document.createElement("div");
+        div.setAttribute("class", "all-status-message");
+        div.innerHTML=`<strong>Promise ${p} finished</strong>`;
+        display.append(div);
+    }
+
+    function raceList(p){
+        const div = document.createElement("div");
+        div.setAttribute("class", "race-status-message");
+        div.innerHTML=`<strong>Promise ${p} finished</strong>`;
+        display.append(div);
+    }
+
+    Promise.all(promises).then((times) => {
+
+        allList(times, "all");
     })
 
-})
+        .catch((e) => {
+            alert(e);
+        })
 
+    Promise.allSettled(promises).then((times) => {
+        allList(times, "allSettled");
+    })
+
+        .catch((e) => {
+            alert(e);
+        })
+
+
+
+        .catch((e) => {
+            alert(e);
+        })
+
+    Promise.race(promises).then((times)=>{
+        attesa.unset();
+        console.log(times);
+
+        // times.forEach((time) => {
+        //     console.log(`I attend ${time} ms`)
+        // })
+       raceList("race");
+
+    }) .catch((e) => {
+        alert(e);
+    })
+
+    Promise.any(promises).then((times)=>{
+        console.log(times);
+
+        // times.forEach((time) => {
+        //     console.log(`I attend ${time} ms`)
+        // })
+        raceList("any");
+
+    }) .catch((e) => {
+        alert(e);
+    })
 
 </script>
 </body>
