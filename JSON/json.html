@@ -29,8 +29,8 @@
     }
 
     const promises = [
-    getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/50529/"),
-    getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/50550/")
+    getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/77349/"),
+    getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/50530/")
 ]
 
     const p = Promise.all(promises);
@@ -53,15 +53,28 @@
 
     function PromiseToAirQualityData(promisesResult) {
         let data = [];
-        promisesResult.forEach(singleResult => {
-            if (singleResult instanceof Array){
-                const location = singleResult[0].location;
+        promisesResult.forEach((singleResult) => {
+            if (singleResult instanceof Array && singleResult.length > 0){
+                let location = singleResult[0].location;
+                let country = location.country;
+                let long = Number.parseFloat(location.longitude);
+                let lat = Number.parseFloat(location.latitude);
+                let placeID = location.id;
+                if (!(typeof country === "string")){
+                    throw new Error("country non è una stringa!!")
+                }
+                if (isNaN(placeID)){
+                    throw new Error("Place id non è un numero!!")
+                }
+                if (isNaN(long)||isNaN(lat)){
+                    throw new Error("Long o Lat non è un numero!!");
+                }
                 data.push({
                     Location: {
-                        country: location.country,
-                        long: location.longitude,
-                        lat: location.latitude,
-                        placeID: location.id,
+                        country: country,
+                        long: long,
+                        lat: lat,
+                        placeID: placeID,
                     },
                     DataSnapshot: singleResult.map(result =>{
                         const Values = [... result.sensordatavalues];
