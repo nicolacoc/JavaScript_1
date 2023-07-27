@@ -46,7 +46,7 @@
         throw new Error("Data not valid");
     }
 
-    const promisesLocation= [];
+
 
     const promises = [
     getAirQualityData("https://data.sensor.community/airrohr/v1/sensor/77350/"),
@@ -70,10 +70,9 @@
 
     }
 
-
-
     function PromiseToAirQualityData(promisesResult) {
         let data = [];
+        const promisesLocation= [];
         promisesResult.forEach((singleResult) => {
             if (singleResult instanceof Array && singleResult.length > 0){
                 let location = singleResult[0].location;
@@ -112,7 +111,26 @@
 
             }
         })
-        return data;
+        return {data, promisesLocation};
+    }
+
+    async function getResult({data, promisesLocation}){
+        let result1= [... data];
+        let result2= await Promise.all(promisesLocation);
+        let location = [];
+            result2.forEach((result4)=>{
+                let address = result4.address;
+                let country =  address.country;
+                let city =  address.city;
+                if (typeof city === "undefined"){
+                    city = address.town;
+                }
+                location.push({country, city})
+
+
+
+        })
+        return {result1, location}
     }
 
     function getToPage({result1, location}){
@@ -170,16 +188,16 @@
             </div>
         </div>`
             i++;
-           if (i < result1.length) {
+            if (i < result1.length) {
                 Location2 = result1[i].Location;
-               lat = Location2.lat;
-               lng = Location2.long;
+                lat = Location2.lat;
+                lng = Location2.long;
 
 
-               country= location[i].country;
-               city = location[i].city;
-               DataSnapshot = result1[i].DataSnapshot;
-               tot += `
+                country= location[i].country;
+                city = location[i].city;
+                DataSnapshot = result1[i].DataSnapshot;
+                tot += `
         <div class="col">
             <h1>Air Quality:</h1>
             <div class="card" style="width: 450px;">
@@ -195,19 +213,19 @@
                       <ul class="snapshot-data list-group list-group-flush">
 
                         `
-               DataSnapshot.forEach(({Values, timeStamp}) =>{
-                   Values.forEach(({value_type, value}) => {
-                       let Symbol1 = "";
-                       if (value_type === "temperature"){Symbol1 = "°";}
-                       tot+=`<li class="list-group-item d-flex">
+                DataSnapshot.forEach(({Values, timeStamp}) =>{
+                    Values.forEach(({value_type, value}) => {
+                        let Symbol1 = "";
+                        if (value_type === "temperature"){Symbol1 = "°";}
+                        tot+=`<li class="list-group-item d-flex">
                                 <div class="row">
                                 <div class="col me-5">${value_type}</div>
                                 <div class="col">${value + Symbol1}</div>
                             </div>
                             </li>`
-                   })
+                    })
 
-                   tot+=`
+                    tot+=`
                         </ul>
                         <div class="card-body text-end">
                             <strong>${timeStamp}</strong>
@@ -232,25 +250,6 @@
 
 
 
-    }
-
-    async function getResult(result){
-        let result1= [... result];
-        let result2= await Promise.all(promisesLocation);
-        let location = [];
-            result2.forEach((result4)=>{
-                let address = result4.address;
-                let country =  address.country;
-                let city =  address.city;
-                if (typeof city === "undefined"){
-                    city = address.town;
-                }
-                location.push({country, city})
-
-
-
-        })
-        return {result1, location}
     }
 
 
