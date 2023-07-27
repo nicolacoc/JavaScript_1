@@ -115,7 +115,7 @@
     }
 
     async function getResult({data, promisesLocation}){
-        let result1= [... data];
+        let DatiArray= [... data];
         let result2= await Promise.all(promisesLocation);
         let location = [];
             result2.forEach((result4)=>{
@@ -130,23 +130,23 @@
 
 
         })
-        return {result1, location}
+        return {DatiArray, location}
     }
 
-    function getToPage({result1, location}){
+    function getToPage({DatiArray, location}){
         const cont = document.querySelector(".container");
 
         let tot = ``;
 
-        for (let i= 0; i < result1.length; i++) {
+        for (let i= 0; i < DatiArray.length; i++) {
             const row = document.createElement("div");
             row.setAttribute("class", "row");
-            let Location2 = result1[i].Location;
+            let Location2 = DatiArray[i].Location;
             let lat = Location2.lat;
             let lng = Location2.long;
             let country= location[i].country;
             let city = location[i].city;
-            let DataSnapshot = result1[i].DataSnapshot;
+            let DataSnapshot = DatiArray[i].DataSnapshot;
             tot += `
         <div class="col">
             <h1>Air Quality:</h1>
@@ -188,15 +188,15 @@
             </div>
         </div>`
             i++;
-            if (i < result1.length) {
-                Location2 = result1[i].Location;
+            if (i < DatiArray.length) {
+                Location2 = DatiArray[i].Location;
                 lat = Location2.lat;
                 lng = Location2.long;
 
 
                 country= location[i].country;
                 city = location[i].city;
-                DataSnapshot = result1[i].DataSnapshot;
+                DataSnapshot = DatiArray[i].DataSnapshot;
                 tot += `
         <div class="col">
             <h1>Air Quality:</h1>
