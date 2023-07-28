@@ -1,7 +1,7 @@
 import {FetchLocation} from "./Fetch.js";
 
 export function GetMap(lat, lng){
-    const key = "AIzaSyDiCScNSVT8dlgU-o8Iu0oxPTbs9Q4x9PM";
+    const key = "";
     return `<div class="map">
             <iframe
                 width="450"
